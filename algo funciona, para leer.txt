@@ -1,0 +1,8 @@
+bueno, con doble click en demo_tu_tienda, deberia abrir el servidor en http://localhost:8000/tutienda
+ahi se puede acceder a crear tienda, que te va a devolver la vista de usoario de la teinda creada.
+despues lo otro que se puede hacer es buscar una tienda por el nombre o algun otro dato,
+si no encuentra arma una en la que todos los campos son :'nulo'.
+la base de datos va vacía, asi que agreguen algunas ahi para probar.
+salvedad, por ahora todas las teindas muestran sus datos, pero todas aparecen con la misma imagen.
+Mañana si puedo lo corrijo. 
+vamo arriba..

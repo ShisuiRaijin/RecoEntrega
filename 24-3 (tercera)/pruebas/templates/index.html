@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href='/static/img/logo_tienda.png'>
+    <title>Tu tienda</title>
+    <link rel="stylesheet" href="/static/css/estilos.css">
+    <!-- Agrego bootstrap -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css"> 
+</head>
+<body>
+
+    <!-- Este es el cartel que aparece cuando se validan los datos del formulario de creación de tienda -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bienvenido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                Su cuenta se ha creado con éxito!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <header > <!-- Saqué class="container"-->
+        <div class="container col-lg-2 col-md-3 col-sm-3 col-xs-3">
+            <img class= "img-fluid" src="/static/img/tienda1.png" alt="Logo de Tu Tienda">
+        </div>
+    </header>
+
+    <main class="pb-5">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a class="navbar-brand" href={{url_for('tutienda')}}>
+                <img src="/static/img/sale.png" width="30" height="30" class="d-inline-block align-top" alt="image for sale">
+                Tu tienda en línea
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                
+            <!-- Barra de navegación -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={{url_for('formulario')}}>Crear tienda</a> 
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="#">Ofertas</a> 
+                    </li>
+
+                    <!-- Aca va el desplegable CATEGORIAS-->
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categorias
+                        </a>
+
+                        <!-- Opciones del desplegable CATEGORIAS -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="bebidas")}}">Alimentos y bebidas</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="educacion")}}">Educación</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="entretenimiento")}}">Entretenimiento</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="salud")}}">Salud</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="varios")}}">Tiendas de artículos varios</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="transporte")}}">Transporte</a>
+                          <a class="dropdown-item" href="{{url_for('buscar_categoria',categoria="vestimenta")}}">Vestimenta</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Otros</a>
+                      </div>
+                    </li>
+
+                    <!-- Aca va el desplegable AYUDA -->
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ayuda
+                        </a>
+
+                        <!-- Opciones del desplegable AYUDA -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Acerca de Tu Tienda</a>
+                            <a class="dropdown-item" href="#">Manual para crear tu tienda</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Contáctanos</a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav mr-2 justify-content-end">
+
+                    <!-- Aca va el desplegable INGRESAR -->
+                    <li class="nav-item dropdown"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ingresar         
+                        </a>
+
+                        <!-- Formulario de ingreso a la cuenta -->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <form class="px-4 py-3">
+
+                                <!-- Para ingresar el correo electrónico -->
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@ejemplo.com">
+                                </div>
+
+                                <!-- Para ingresar la contraseña -->
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Contraseña</label>
+                                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Contraseña">
+                                </div>
+
+                                <!-- Opción para recordar contraseña  -->
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                    <label class="form-check-label" for="dropdownCheck">
+                                        Recordar contraseña
+                                    </label>
+                                </div>
+
+                                <!-- Botón para acceder -->
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+
+                            </form>
+
+                            <div class="dropdown-divider"></div>
+
+                            <!-- Opciones de ingreso -->
+                            <a class="dropdown-item" href={{url_for('formulario')}}>¿Eres nuevo?, regístrate</a>
+                            <a class="dropdown-item" href="#">¿Olvidaste la contraseña?</a>
+
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Barra de búsqueda -->
+                <form class="form-inline my-2 my-lg-0" action='/buscar' method="POST">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Busca una tienda" name ='buscar' aria-label="Search">
+                  <button id="search-button"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+              </form>
+            </div>
+        </nav> 
+
+        <!-- Cuerpo de la pagina -->
+        <div class="container-fluid mt-5">
+
+            <!-- A modo de visualizar un carrousel para 3 tiendas-->
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img id="img1_carrousel"  class="d-block w-60"  alt="Fachada de la tienda">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="img2_carrousel" class="d-block w-60"  alt="Fachada de la tienda">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="img3_carrousel" class="d-block w-60"  alt="Fachada de la tienda">
+                    </div>
+                </div>
+
+
+
+
+                <!-- Botones de SIGUIENTE/ANTERIOR de las img del carrousel. 
+                También le podemos agregar texto -->
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Primer SET de tres tiendas-->
+<div class="card-deck">
+
+<!-- tienda 0 -->
+  <div class="card">
+    <img id="img_tienda0" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t0"><!-- Nombre de la primer tienda del json  --></h5>
+      <p class="card-text" id="direccion_t0"><!-- Direccion de la primer tienda del json --></p>
+      <p class="card-text"><small class="text-muted" id="categoria_t0"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+<!--tienda 1-->
+  <div class="card">
+    <img id="img_tienda1" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t1"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t1"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted"  id="categoria_t1"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+<!--tienda 2-->
+  <div class="card">
+    <img id="img_tienda2" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t2"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t2"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted"  id="categoria_t2"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+</div>
+
+<!--Segundo SET de 3 tiendas-->
+<div class="card-deck">
+
+  <!-- tienda 3 -->
+  <div class="card">
+    <img id="img_tienda3" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title"  id="nombre_t3"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text"  id="direccion_t3"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted"  id="categoria_t3"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+<!--   tienda 4 -->
+  <div class="card">
+    <img id="img_tienda4" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t4"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text"  id="direccion_t4"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted" id="categoria_t4"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+<!--   tienda 5 -->
+  <div class="card">
+    <img id="img_tienda5" class="card-img-top" >
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t5"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t5"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted" id="categoria_t5"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+  
+</div>
+
+
+
+<!--Tercer SET de tres tiendas-->
+
+<!--   tienda 6 -->
+<div class="card-deck">
+  <div class="card">
+    <img class="card-img-top" id="img_tienda6" >
+    <div class="card-body">
+      <h5 class="card-title" id="nombre_t6"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t6"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted" id="categoria_t6"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+  <!--   tienda 7 -->
+  <div class="card">
+    <img class="card-img-top" id="img_tienda7" >
+    <div class="card-body">
+      <h5 class="card-title"  id="nombre_t7"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t7"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted"  id="categoria_t7"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+
+  <!--   tienda 8 --> 
+  <div class="card">
+    <img class="card-img-top"  id="img_tienda8" >
+    <div class="card-body">
+      <h5 class="card-title"  id="nombre_t8"><!-- Nombre de tienda del json  --></h5>
+      <p class="card-text" id="direccion_t8"><!-- Direccion de tienda del json --></p>
+      <p class="card-text"><small class="text-muted"  id="categoria_t7"><!-- Categoria de la primer tienda --></small></p>
+    </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer container-fluid bg-dark">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h6 class="text-muted">
+                    <br>
+                    <br>
+                        Proyecto primer año b_IT / Tu Tienda<br>
+                        Equipo RecoLab - Grupo Litoral<br>
+                    </h6>
+                </div>
+            </div>
+
+            <div class="row"> 
+                <div class="col-md-12 text-center">
+                    <p class="text-muted small">
+                    imauror98@gmail.com<br>
+                    juantrottatorres@gmail.com<br>
+                    jjpf85@gmail.com<br>
+                    benelliraul@gmail.com<br>
+                    camilachoca44@gmail.com<br>.</p>
+                </div>
+            </div>
+        </div> 
+    </footer>
+
+
+    <!-- Agrego archivos js -->
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/comportamiento.js"></script>
+    <script src="/static/js/pag_principal.js"></script>
+
+</body>
+</html>

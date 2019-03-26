@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <body>
+   <div> tienda , <span id ="nombre"></span>
+   <span id ="otro"></span>
+   <span id ="otro1"></span> mas espacio
+   <span id ="otro2"></span> espacio
+   <span id ="otro3"></span>
+  </div>
+  </body>
+  <script>
+      var tienda=JSON.parse('{{tienda | tojson | safe}}');
+      document.getElementById('nombre').innerHTML=tienda.nombre_tienda;
+      document.getElementById('otro').innerHTML=tienda.direccion_tienda;
+      document.getElementById('otro2').innerHTML=tienda.correo_elecctronico;
+      document.getElementById('otro1').innerHTML=tienda.imagen_portada_tienda;
+      document.getElementById('otro3').innerHTML=tienda.contacto;
+      
+    </script>
+</html>
