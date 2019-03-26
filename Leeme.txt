@@ -1,0 +1,4 @@
+se necesita para correr python 3, flask,
+el archivo a correr esta en la carpeta: "\25-3\pruebas\demo_tu_tienda.py"
+luego de iniciada la app vamos a 
+http://localhost/tutienda
